@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>📜 Surat Resmi Dari Ayah 📜</title>
+    <style>
+        /* ... (style sebelumnya tetap sama) ... */
+        .langkah {
+            background: #fff8f0;
+            padding: 20px;
+            margin: 15px;
+            border-radius: 10px;
+            border-left: 5px solid #ff6d00;
+        }
+        .syarat {
+            cursor: pointer;
+            padding: 10px;
+            margin: 5px;
+            background: #fff3e0;
+            border-radius: 5px;
+        }
+        .syarat:hover {
+            background: #ffe0b2;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔧 SURAT BERHARGA DARI PAPAH 🔧</h1>
+    
+    <img src="https://cdn-icons-png.flaticon.com/512/869/869636.png" class="stempel" alt="Stempel Ayah">
+    
+    <div class="surat">
+        <h2>Untuk: Putri Cantikku 👸<br>
+        Dari: Ayah Tercinta 👨👧</h2>
+        
+        <button onclick="mulaiBaca(1)" id="tombolUtama">Buka Surat Penting! 🚨</button>
+        
+        <!-- Lapisan 1 - Peringatan -->
+        <div id="langkah1" class="hidden">
+            <div class="langkah">
+                <h3 style="color: #d50000">PERINGATAN! ⚠️</h3>
+                <p>Sebelum membuka surat ini, kamu harus:</p>
+                <div class="syarat" onclick="centang(this)">
+                    [ ] Sanggup tidak marah kalau dikibulin Ayah
+                </div>
+                <div class="syarat" onclick="centang(this)">
+                    [ ] Berjanji tetap jadi anak Ayah selamanya
+                </div>
+                <button onclick="mulaiBaca(2)" style="margin-top:15px">Lanjutkan ➡️</button>
+            </div>
+        </div>
+
+        <!-- Lapisan 2 - Nasehat 1 -->
+        <div id="langkah2" class="hidden">
+            <div class="langkah">
+                <h3>📌 Nasehat Penting #1</h3>
+                <p>Kalau ada cowok nakal mendekat:</p>
+                <div style="font-size:1.2em">
+                    🏃♀️ LARI <br>
+                    📲 TELPON AYAH <br>
+                    🔧 Bawa kunci inggris!
+                </div>
+                <button onclick="mulaiBaca(3)" style="margin-top:15px">Nasehat Selanjutnya 👉</button>
+            </div>
+        </div>
+
+        <!-- Lapisan 3 - Nasehat 2 -->
+        <div id="langkah3" class="hidden">
+            <div class="langkah">
+                <h3>🧠 Nasehat Bijak #2</h3>
+                <p>Ingat 3 hal ini selalu:</p>
+                <ol>
+                    <li>💸 Uang jajan jangan dihabiskan hari ini juga</li>
+                    <li>🚗 SIM baru boleh dibuat setelah umur 30</li>
+                    <li>👨👧 Ayah selalu benar (walaupun salah)</li>
+                </ol>
+                <button onclick="mulaiBaca(4)" style="margin-top:15px">Terakhir! 🏁</button>
+            </div>
+        </div>
+
+        <!-- Lapisan 4 - Pesan Akhir -->
+        <div id="langkah4" class="hidden">
+            <div class="langkah" style="background:#fbe9e7">
+                <h3>💖 Pesan Terakhir</h3>
+                <p>Semua nasehat ini hanya kedok...</p>
+                <p style="font-size:1.5em">Yang penting kamu tahu:<br>
+                🥇 Kamu anak terbaik Ayah<br>
+                🌟 Ayah sayang kamu sampai kapanpun!</p>
+                <div style="font-size:60px">👨👧</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let langkah = 0;
+        
+        function mulaiBaca(step) {
+            langkah = step;
+            // Sembunyikan semua langkah
+            document.querySelectorAll('[id^="langkah"]').forEach(el => el.classList.add('hidden'));
+            
+            // Tampilkan langkah sesuai step
+            if(step <= 4) {
+                document.getElementById(`langkah${step}`).classList.remove('hidden');
+            }
+            
+            // Update tombol utama
+            const tombol = document.getElementById('tombolUtama');
+            const texts = ['', 'Langkah Kedua ➡️', 'Lanjut Lagi 👉', 'Hampir Selesai! 🏁'];
+            if(step > 1) tombol.innerHTML = texts[step-1] || 'Selesai! 🎉';
+            
+            // Efek khusus di step akhir
+            if(step === 4) {
+                const emojis = ['💖', '👨👧', '🎉', '🌟'];
+                for(let i = 0; i < 50; i++) {
+                    let confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.innerHTML = emojis[Math.floor(Math.random()*emojis.length)];
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.animationDelay = Math.random() * 2 + 's';
+                    document.body.appendChild(confetti);
+                    setTimeout(() => confetti.remove(), 3000);
+                }
+                tombol.style.display = 'none';
+            }
+        }
+
+        function centang(el) {
+            el.innerHTML = el.innerHTML.replace('[ ]', '[✅]');
+            el.style.background = '#c8e6c9';
+        }
+
+        // Easter egg
+        document.addEventListener('copy', function(e) {
+            alert('📋 Dilarang kopas! Nasehat ayah harus diingat, bukan dicopas!');
+            e.preventDefault();
+        });
+    </script>
+</body>
+</html>
