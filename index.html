@@ -6,7 +6,7 @@
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f0f9ff;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             margin: 0;
             min-height: 100vh;
             display: flex;
@@ -16,23 +16,26 @@
 
         .amplop {
             background: white;
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
             width: 90%;
             max-width: 500px;
-            padding: 30px;
+            padding: 40px;
             cursor: pointer;
             transition: transform 0.3s ease;
+            position: relative;
         }
 
         .step {
             display: none;
             padding: 20px;
-            border-radius: 10px;
+            border-radius: 15px;
             background: #fff5e6;
-            margin: 15px 0;
+            margin: 20px 0;
             cursor: pointer;
             transition: all 0.3s ease;
+            position: relative;
+            min-height: 200px;
         }
 
         .step.active {
@@ -40,52 +43,75 @@
             animation: fadeIn 0.5s ease-in-out;
         }
 
-        .amplop:hover {
-            transform: scale(1.02);
-        }
-
-        .judul {
-            color: #d32f2f;
+        .emoji-container {
+            position: relative;
             text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .instruksi {
-            text-align: center;
-            color: #555;
-            margin-bottom: 30px;
-        }
-
-        .tombol {
-            background: #ff6d00;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: block;
-            margin: 20px auto;
-        }
-
-        .tombol:hover {
-            background: #e65c00;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            margin: 20px 0;
         }
 
         .emoji {
             font-size: 60px;
+            cursor: help;
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+
+        .tooltip {
+            visibility: hidden;
+            width: 200px;
+            background: #ff6d00;
+            color: #fff;
             text-align: center;
-            margin: 20px 0;
+            border-radius: 5px;
+            padding: 8px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -100px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .emoji-container:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-20px); }
+            60% { transform: translateY(-10px); }
+        }
+
+        .tombol {
+            background: #d32f2f;
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 20px auto;
+            font-weight: bold;
+        }
+
+        .tombol:hover {
+            background: #c62828;
+            transform: scale(1.05);
         }
 
         .highlight {
             color: #d32f2f;
             font-weight: bold;
+            text-align: center;
+            margin: 15px 0;
         }
     </style>
 </head>
@@ -97,7 +123,12 @@
         <!-- Langkah 1 -->
         <div class="step active" id="step1" onclick="lanjut(2)">
             <p style="font-size:1.2em">📅 Tertanggal: <em>Selamanya</em></p>
-            <div class="emoji">👇</div>
+            
+            <div class="emoji-container">
+                <div class="emoji" onclick="animateEmoji(this)">👇</div>
+                <span class="tooltip">Klik emoji ini untuk melihat pesan rahasia!</span>
+            </div>
+            
             <p class="highlight">Klik di sini untuk mulai membaca</p>
         </div>
 
@@ -109,7 +140,11 @@
             ✅ Nilai B boleh asal usaha maksimal<br>
             ✅ Yang penting paham, bukan hafal<br>
             <small>(Tapi matematika jangan dikurangi ayah!)</small></p>
-            <div class="emoji">📘</div>
+            
+            <div class="emoji-container">
+                <div class="emoji" onclick="animateEmoji(this)">📘</div>
+                <span class="tooltip">Buku ini menyimpan kebijaksanaan terpendam!</span>
+            </div>
         </div>
 
         <!-- Langkah 3 - Karakter -->
@@ -120,7 +155,11 @@
             🛑 Berani bilang 'tidak' pada yang salah<br>
             🛑 Berani minta maaf kalau salah<br>
             <em>"Keberanian terbesar adalah jujur pada diri sendiri"</em></p>
-            <div class="emoji">🌟</div>
+            
+            <div class="emoji-container">
+                <div class="emoji" onclick="animateEmoji(this)">🌟</div>
+                <span class="tooltip">Bintang ini akan membimbingmu!</span>
+            </div>
         </div>
 
         <!-- Langkah 4 - Kehidupan -->
@@ -136,11 +175,16 @@
                 <p>🔹 Hormati semua orang: <br>
                 <small>"Kecuali yang ganggu kamu, ayah yang urus!"</small></p>
             </div>
+            
+            <div class="emoji-container">
+                <div class="emoji" onclick="animateEmoji(this)">👨👧🌈</div>
+                <span class="tooltip">Keluarga selalu mendukungmu!</span>
+            </div>
+            
             <div style="border-top:2px dashed #ff6d00;padding:20px">
                 <p>❤️ Intinya:<br>
                 Ayah ingin kamu tumbuh jadi:<br>
                 <span style="font-size:1.3em">💡 CERDAS • 🤝 BERAKHLAK • 💪 TANGGUH</span></p>
-                <div class="emoji">👨👧🌈</div>
             </div>
         </div>
     </div>
@@ -157,6 +201,16 @@
             current.classList.remove('active');
             void current.offsetWidth; // Trigger reflow untuk animasi
             next.classList.add('active');
+        }
+
+        function animateEmoji(element) {
+            element.style.animation = 'bounce 0.5s';
+            setTimeout(() => {
+                element.style.animation = '';
+            }, 500);
+            
+            // Hentikan propagasi klik agar tidak pindah step
+            event.stopPropagation();
         }
     </script>
 </body>
