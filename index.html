@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Surat Nasehat Interaktif Ayah</title>
     <style>
-        /* ===== BASE STYLES ===== */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: #f0f9ff;
@@ -16,7 +15,6 @@
             overflow-x: hidden;
         }
 
-        /* ===== ENVELOPE CONTAINER ===== */
         .amplop {
             background: white;
             border-radius: 15px;
@@ -32,7 +30,6 @@
             transform: scale(1.02) rotate(1deg);
         }
 
-        /* ===== TYPOGRAPHY ===== */
         .judul {
             color: #d32f2f;
             text-align: center;
@@ -48,7 +45,6 @@
             animation: blink 1.5s infinite;
         }
 
-        /* ===== STEPS & ANIMATIONS ===== */
         .step {
             display: none;
             padding: 20px;
@@ -69,12 +65,6 @@
             animation: slideOutLeft 0.6s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
         }
 
-        .step:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-        }
-
-        /* ===== BUTTON STYLES ===== */
         .tombol {
             background: #ff6d00;
             color: white;
@@ -94,19 +84,6 @@
             transform: scale(1.05);
         }
 
-        .tombol:active:after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 5px;
-            height: 5px;
-            background: rgba(255,255,255,0.5);
-            border-radius: 50%;
-            animation: ripple 0.6s ease-out;
-        }
-
-        /* ===== EMOJI & EFFECTS ===== */
         .emoji {
             font-size: 60px;
             text-align: center;
@@ -117,10 +94,9 @@
         .highlight {
             color: #d32f2f;
             font-weight: bold;
-            animation: highlightPulse 2s infinite;
         }
 
-        /* ===== ANIMATION KEYFRAMES ===== */
+        /* Animasi Baru */
         @keyframes slideInRight {
             from { transform: translateX(100%); opacity: 0; }
             to { transform: translateX(0); opacity: 1; }
@@ -136,35 +112,39 @@
             50% { transform: translateY(-20px); }
         }
 
-        @keyframes ripple {
-            0% { transform: scale(1); opacity: 1; }
-            100% { transform: scale(40); opacity: 0; }
-        }
-
-        @keyframes highlightPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
         @keyframes blink {
             50% { opacity: 0.5; }
         }
 
-        @keyframes fall {
-            to { transform: translateY(100vh) rotate(360deg); }
+        .instruksi-buka {
+            background: #ff6d0022;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px dashed #ff6d00;
+            text-align: center;
+            margin: 20px 0;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .instruksi-buka:hover {
+            background: #ff6d0044;
+            transform: scale(1.05);
         }
     </style>
 </head>
 <body>
     <div class="amplop" onclick="bukaSurat()">
         <h1 class="judul">📜 SURAT NASEHAT AYAH 📜</h1>
-        <p class="instruksi">Klik amplop untuk membuka kebijakan ayah</p>
+        <p class="instruksi">🖱️ Klik amplop 2x untuk mulai! 🖱️</p>
         
         <!-- Langkah 1 -->
-        <div class="step active" id="step1" onclick="lanjut(2)">
+        <div class="step active" id="step1">
             <p style="font-size:1.2em">📅 Tertanggal: <em>Selamanya</em></p>
             <div class="emoji">👇</div>
-            <p class="highlight">Klik di sini untuk mulai membaca</p>
+            <div class="instruksi-buka" onclick="lanjut(2)">
+                🖱️ TEKAN DI SINI UNTUK MEMBACA 🖱️
+            </div>
         </div>
 
         <!-- Langkah 2 - Pendidikan -->
@@ -176,9 +156,12 @@
             ✅ Yang penting paham, bukan hafal<br>
             <small>(Tapi matematika jangan dikurangi ayah!)</small></p>
             <div class="emoji">📘</div>
+            <div class="instruksi-buka">
+                🖱️ KLIK DI SINI UNTUK LANJUT 🖱️
+            </div>
         </div>
 
-        <!-- Langkah 3 - Karakter -->
+        <!-- Langkah 3 - Tanggung Jawab -->
         <div class="step" id="step3" onclick="lanjut(4)">
             <h3>💪 PASAL 2: TANGGUNG JAWAB</h3>
             <p>"Jadilah pemberani tapi..."<br>
@@ -187,6 +170,9 @@
             🛑 Berani minta maaf kalau salah<br>
             <em>"Keberanian terbesar adalah jujur pada diri sendiri"</em></p>
             <div class="emoji">🌟</div>
+            <div class="instruksi-buka">
+                🖱️ TEKAN UNTUK BACA PESAN TERAKHIR 🖱️
+            </div>
         </div>
 
         <!-- Langkah 4 - Kehidupan -->
@@ -250,6 +236,15 @@
                 setTimeout(() => confetti.remove(), 5000);
             }
         }
+
+        // Animasi jatuh konfeti
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fall {
+                to { transform: translateY(100vh) rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
