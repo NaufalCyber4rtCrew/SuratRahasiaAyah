@@ -3,202 +3,207 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Surat Nasehat Interaktif Ayah</title>
+    <title>Surat Interaktif Ayah</title>
     <style>
-        /* ====== CORE STYLES ====== */
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Comic Neue', cursive;
-            background: linear-gradient(135deg, #ffd7b5, #ffe6cc);
-            margin: 0;
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 1rem;
+            touch-action: manipulation;
+        }
+
+        /* Envelope Container */
+        .container {
+            width: 100%;
+            max-width: 500px;
+            perspective: 1000px;
         }
 
         .amplop {
-            background: white;
-            border-radius: 25px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-            width: 95%;
-            max-width: 500px;
-            padding: 30px;
+            background: #fff;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             position: relative;
             overflow: hidden;
-            transform-style: preserve-3d;
         }
 
-        /* ====== RESPONSIVE TYPGRAPHY ====== */
-        .judul {
-            color: #d32f2f;
-            text-align: center;
-            font-size: 2rem;
-            margin-bottom: 15px;
-        }
-
-        .instruksi {
-            text-align: center;
-            color: #555;
-            font-size: 1rem;
-            margin-bottom: 25px;
-        }
-
-        /* ====== STEP CONTAINER ====== */
-        .step {
+        /* Content Cards */
+        .card {
             display: none;
             opacity: 0;
-            transform: translateX(50px);
-            padding: 20px;
-            border-radius: 15px;
-            background: #fff5e6;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateX(100%);
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
-        .step.active {
+        .card.active {
             display: block;
             opacity: 1;
             transform: translateX(0);
         }
 
-        /* ====== RESPONSIVE ELEMENTS ====== */
-        .emoji {
-            font-size: 4rem;
-            display: block;
-            margin: 20px auto;
-            cursor: pointer;
+        /* Typography */
+        .judul {
+            color: #d32f2f;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
 
-        .tombol {
+        .emoji {
+            font-size: 3rem;
+            text-align: center;
+            margin: 1rem 0;
+            animation: bounce 1.5s infinite;
+        }
+
+        /* Navigation */
+        .nav-btn {
             background: #ff6d00;
             color: white;
             border: none;
-            padding: 12px 25px;
-            border-radius: 25px;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
             cursor: pointer;
+            margin: 1.5rem auto 0;
             display: block;
-            margin: 20px auto;
-            font-weight: bold;
-            transition: 0.3s;
+            width: max-content;
+            transition: transform 0.3s;
         }
 
-        /* ====== MEDIA QUERIES ====== */
+        .nav-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Animations */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes confetti {
+            0% { transform: translateY(-100%) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
+
+        /* Mobile Styles */
         @media (max-width: 480px) {
-            .judul { font-size: 1.5rem; }
-            .instruksi { font-size: 0.9rem; }
-            .emoji { font-size: 3rem; }
-            .tombol { padding: 10px 20px; }
+            .judul {
+                font-size: 1.5rem;
+            }
+            
+            .amplop {
+                padding: 1rem;
+            }
+            
+            .nav-btn {
+                width: 100%;
+                padding: 1rem;
+            }
+            
+            .emoji {
+                font-size: 2.5rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="amplop">
-        <h1 class="judul">📜 SURAT NASEHAT AYAH 📜</h1>
-        <p class="instruksi">Klik untuk membuka kebijakan ayah</p>
-        
-        <!-- STEP 1 -->
-        <div class="step active" id="step1">
-            <p style="text-align:center;font-size:1.1rem">📅 Tertanggal: <em>Selamanya</em></p>
-            <div class="emoji" onclick="animateEmoji('👇')">👇</div>
-            <button class="tombol" onclick="lanjut(2)">Buka Surat 📜</button>
-        </div>
-
-        <!-- STEP 2 -->
-        <div class="step" id="step2">
-            <h3>🎓 PASAL 1: BELAJAR SERU</h3>
-            <p style="font-size:0.9rem">
-                "Rajin-rajin belajar nak, tapi..."<br>
-                ✅ Kalau ngantuk boleh tidur<br>
-                ✅ Nilai B boleh asal usaha maksimal<br>
-                ✅ Yang penting paham, bukan hafal<br>
-                <small>(Tapi matematika jangan dikurangi ayah!)</small>
-            </p>
-            <div class="emoji" onclick="animateEmoji('📘')">📘</div>
-            <button class="tombol" onclick="lanjut(3)">Lanjutkan 📖</button>
-        </div>
-
-        <!-- STEP 3 -->
-        <div class="step" id="step3">
-            <h3>💪 PASAL 2: TANGGUNG JAWAB</h3>
-            <p style="font-size:0.9rem">
-                "Jadilah pemberani tapi..."<br>
-                🛑 Kalau hujan deras, lindungi rambut dulu<br>
-                🛑 Berani bilang 'tidak' pada yang salah<br>
-                🛑 Berani minta maaf kalau salah<br>
-                <em>"Keberanian terbesar adalah jujur pada diri sendiri"</em>
-            </p>
-            <div class="emoji" onclick="animateEmoji('🌟')">🌟</div>
-            <button class="tombol" onclick="lanjut(4)">Terakhir 🌈</button>
-        </div>
-
-        <!-- STEP 4 -->
-        <div class="step" id="step4">
-            <h3 style="color:#d32f2f">🌍 PASAL 3: HIDUP BAIK</h3>
-            <div style="text-align:left;padding:10px;font-size:0.9rem">
-                <p>🔹 Sayangi lingkungan: <br>
-                <small>"Tapi sampah cucian boleh ditaruh di kamar ayah"</small></p>
-                
-                <p>🔹 Jaga kesehatan: <br>
-                <small>"Kalau begadang wajib minum susu + foto bukti"</small></p>
-                
-                <p>🔹 Hormati semua orang: <br>
-                <small>"Kecuali yang ganggu kamu, ayah yang urus!"</small></p>
+    <div class="container">
+        <div class="amplop">
+            <!-- Card 1 - Cover -->
+            <div class="card active" id="card1">
+                <h1 class="judul">💌 Surat Dari Ayah</h1>
+                <div class="emoji">👨👧</div>
+                <button class="nav-btn" onclick="showCard(2)">Buka Surat</button>
             </div>
-            <div class="emoji" onclick="animateEmoji('👨👧🌈')">👨👧🌈</div>
+
+            <!-- Card 2 - Content 1 -->
+            <div class="card" id="card2">
+                <h2 class="judul">📜 Pasal 1: Cinta Abadi</h2>
+                <p style="margin: 1rem 0; line-height: 1.6;">
+                    "Nak, ketahuilah:<br>
+                    ❤️ Cinta ayah tak akan pernah pudar<br>
+                    🌟 Meski waktu terus bergulir<br>
+                    🛡️ Ayah akan selalu di sini untukmu"
+                </p>
+                <div class="emoji">🦸♂️</div>
+                <button class="nav-btn" onclick="showCard(3)">Lanjut Baca ➡️</button>
+            </div>
+
+            <!-- Card 3 - Content 2 -->
+            <div class="card" id="card3">
+                <h2 class="judul">⚡ Pasal 2: Kekuatan</h2>
+                <p style="margin: 1rem 0; line-height: 1.6;">
+                    "Ingat selalu:<br>
+                    💪 Kamu lebih kuat dari yang kamu kira<br>
+                    🌈 Masalah sementara, ayah selalu ada<br>
+                    🚀 Raih mimpimu setinggi langit!"
+                </p>
+                <div class="emoji">🚀</div>
+                <button class="nav-btn" onclick="showCard(4)">Lanjut ➡️</button>
+            </div>
+
+            <!-- Card 4 - Final -->
+            <div class="card" id="card4">
+                <h2 class="judul">🎉 Pesan Terakhir</h2>
+                <p style="text-align: center; margin: 2rem 0;">
+                    <span style="font-size: 1.5rem; display: block; margin: 1rem 0;">
+                        😊 Ayah sayang kamu lebih dari apapun di dunia ini! 💖
+                    </span>
+                </p>
+                <div class="emoji">🎉👨👧</div>
+            </div>
         </div>
     </div>
 
     <script>
-        let currentStep = 1;
-        
-        function lanjut(nomor) {
-            // Sembunyikan semua step
-            document.querySelectorAll('.step').forEach(step => {
-                step.style.display = 'none';
-                step.classList.remove('active');
-            });
+        let currentCard = 1;
+
+        function showCard(nextCard) {
+            // Animate current card out
+            const currentElement = document.getElementById(`card${currentCard}`);
+            currentElement.classList.remove('active');
             
-            // Tampilkan step baru dengan animasi
-            const target = document.getElementById('step' + nomor);
+            // Wait for animation to finish
             setTimeout(() => {
-                target.style.display = 'block';
-                setTimeout(() => target.classList.add('active'), 50);
+                const nextElement = document.getElementById(`card${nextCard}`);
+                nextElement.classList.add('active');
+                currentCard = nextCard;
+
+                // Add confetti for last card
+                if(nextCard === 4) createConfetti();
             }, 300);
-            
-            currentStep = nomor;
-            
-            // Efek konfeti di step terakhir
-            if(nomor === 4) {
-                addKonfeti();
-            }
         }
 
-        function animateEmoji(emoji) {
-            const element = document.createElement('div');
-            element.textContent = emoji;
-            element.style = `
-                position: fixed;
-                font-size: 2rem;
-                left: ${Math.random()*100}vw;
-                top: ${Math.random()*100}vh;
-                animation: jump 1s ease;
-            `;
-            document.body.appendChild(element);
-            setTimeout(() => element.remove(), 1000);
-        }
-
-        function addKonfeti() {
-            const emojis = ['🎉','🌟','📚','👨👧','🌈'];
-            for(let i=0; i<50; i++) {
-                const konfeti = document.createElement('div');
-                konfeti.textContent = emojis[Math.floor(Math.random()*emojis.length)];
-                konfeti.style = `
+        function createConfetti() {
+            const emojis = ['💖', '🎉', '👨👧', '🎁'];
+            for(let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.cssText = `
                     position: fixed;
-                    font-size: 1.5rem;
-                    left: ${Math.random()*100}vw;
-                    animation: fall ${Math.random()*3+2}s linear infinite;
-                    color: hsl(${Math.random()*360},70%,50%);
+                    left: ${Math.random() * 100}%;
+                    top: -30px;
+                    font-size: 25px;
+                    animation: confetti ${Math.random() * 3 + 2}s linear;
+                    z-index: 999;
+                    pointer-events: none;
                 `;
-                document.body.appendChild(konfeti);
+                confetti.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                document.body.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 5000);
             }
         }
     </script>
