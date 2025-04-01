@@ -5,91 +5,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Surat Nasehat Interaktif Ayah</title>
     <style>
-        /* ===== RESPONSIVE BASE ===== */
+        /* ====== CORE STYLES ====== */
         body {
             font-family: 'Comic Neue', cursive;
-            background: linear-gradient(135deg, #ffd7b5 0%, #ffe6cc 100%);
+            background: linear-gradient(135deg, #ffd7b5, #ffe6cc);
             margin: 0;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow-x: hidden;
-            position: relative;
         }
 
-        /* ===== RESPONSIVE CONTAINER ===== */
         .amplop {
             background: white;
             border-radius: 25px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.2);
             width: 95%;
             max-width: 500px;
-            padding: 20px;
-            cursor: pointer;
+            padding: 30px;
             position: relative;
             overflow: hidden;
-            transition: transform 0.3s ease;
+            transform-style: preserve-3d;
         }
 
-        @media (max-width: 480px) {
-            .amplop {
-                padding: 15px;
-                box-shadow: 0 5px 20px rgba(0,0,0,0.15);
-            }
-        }
-
-        /* ===== RESPONSIVE TYPOGRAPHY ===== */
+        /* ====== RESPONSIVE TYPGRAPHY ====== */
         .judul {
             color: #d32f2f;
             text-align: center;
+            font-size: 2rem;
             margin-bottom: 15px;
-            font-size: 1.8em;
-            line-height: 1.2;
         }
 
         .instruksi {
             text-align: center;
             color: #555;
-            margin-bottom: 20px;
-            font-size: 0.9em;
+            font-size: 1rem;
+            margin-bottom: 25px;
         }
 
-        .step-instruksi {
-            color: #d32f2f;
-            font-weight: bold;
-            text-align: center;
-            margin: 10px 0;
-            font-size: 0.9em;
-            animation: pulse 2s infinite;
-        }
-
-        /* ===== RESPONSIVE STEPS ===== */
+        /* ====== STEP CONTAINER ====== */
         .step {
-            padding: 15px;
+            display: none;
+            opacity: 0;
+            transform: translateX(50px);
+            padding: 20px;
             border-radius: 15px;
             background: #fff5e6;
-            margin: 10px 0;
-            cursor: pointer;
-            transform-origin: top;
-            transition: all 0.3s ease;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .emoji {
-            font-size: 6vw;
-            cursor: pointer;
-            transition: transform 0.3s ease;
+        .step.active {
             display: block;
-            margin: 15px auto;
+            opacity: 1;
+            transform: translateX(0);
         }
 
-        @media (max-width: 480px) {
-            .emoji {
-                font-size: 8vw;
-            }
+        /* ====== RESPONSIVE ELEMENTS ====== */
+        .emoji {
+            font-size: 4rem;
+            display: block;
+            margin: 20px auto;
+            cursor: pointer;
         }
 
-        /* ===== RESPONSIVE BUTTON ===== */
         .tombol {
             background: #ff6d00;
             color: white;
@@ -97,85 +75,65 @@
             padding: 12px 25px;
             border-radius: 25px;
             cursor: pointer;
-            transition: all 0.3s ease;
             display: block;
-            margin: 15px auto;
+            margin: 20px auto;
             font-weight: bold;
-            font-size: 0.9em;
+            transition: 0.3s;
         }
 
-        /* ===== MEDIA QUERIES ===== */
+        /* ====== MEDIA QUERIES ====== */
         @media (max-width: 480px) {
-            .judul {
-                font-size: 1.5em;
-            }
-            
-            .step-instruksi {
-                font-size: 0.8em;
-            }
-            
-            .amplop {
-                border-radius: 15px;
-            }
-            
-            .tombol {
-                padding: 10px 20px;
-                font-size: 0.8em;
-            }
-        }
-
-        /* ===== ANIMATIONS ===== */
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+            .judul { font-size: 1.5rem; }
+            .instruksi { font-size: 0.9rem; }
+            .emoji { font-size: 3rem; }
+            .tombol { padding: 10px 20px; }
         }
     </style>
 </head>
 <body>
-    <div class="amplop" onclick="bukaSurat()">
+    <div class="amplop">
         <h1 class="judul">📜 SURAT NASEHAT AYAH 📜</h1>
         <p class="instruksi">Klik untuk membuka kebijakan ayah</p>
         
-        <!-- Langkah 1 -->
-        <div class="step active" id="step1" onclick="lanjut(2)">
-            <p style="font-size:1.1em">📅 Tertanggal: <em>Selamanya</em></p>
-            <div class="emoji" onclick="animateEmoji(event, this)">👇</div>
-            <p class="step-instruksi">Klik untuk membuka surat rahasia!</p>
+        <!-- STEP 1 -->
+        <div class="step active" id="step1">
+            <p style="text-align:center;font-size:1.1rem">📅 Tertanggal: <em>Selamanya</em></p>
+            <div class="emoji" onclick="animateEmoji('👇')">👇</div>
+            <button class="tombol" onclick="lanjut(2)">Buka Surat 📜</button>
         </div>
 
-        <!-- Langkah 2 - Pendidikan -->
-        <div class="step" id="step2" onclick="lanjut(3)">
+        <!-- STEP 2 -->
+        <div class="step" id="step2">
             <h3>🎓 PASAL 1: BELAJAR SERU</h3>
-            <p style="font-size:0.9em">"Rajin-rajin belajar nak, tapi..."<br>
-            ✅ Kalau ngantuk boleh tidur<br>
-            ✅ Nilai B boleh asal usaha maksimal<br>
-            ✅ Yang penting paham, bukan hafal<br>
-            <small>(Tapi matematika jangan dikurangi ayah!)</small></p>
-            
-            <div class="emoji" onclick="animateEmoji(event, this)">📘</div>
-            <p class="step-instruksi">Klik buku untuk lanjut membaca</p>
-            <button class="tombol" onclick="event.stopPropagation(); lanjut(3)">Pasal Berikutnya 📘</button>
+            <p style="font-size:0.9rem">
+                "Rajin-rajin belajar nak, tapi..."<br>
+                ✅ Kalau ngantuk boleh tidur<br>
+                ✅ Nilai B boleh asal usaha maksimal<br>
+                ✅ Yang penting paham, bukan hafal<br>
+                <small>(Tapi matematika jangan dikurangi ayah!)</small>
+            </p>
+            <div class="emoji" onclick="animateEmoji('📘')">📘</div>
+            <button class="tombol" onclick="lanjut(3)">Lanjutkan 📖</button>
         </div>
 
-        <!-- Langkah 3 - Karakter -->
-        <div class="step" id="step3" onclick="lanjut(4)">
+        <!-- STEP 3 -->
+        <div class="step" id="step3">
             <h3>💪 PASAL 2: TANGGUNG JAWAB</h3>
-            <p style="font-size:0.9em">"Jadilah pemberani tapi..."<br>
-            🛑 Kalau hujan deras, lindungi rambut dulu<br>
-            🛑 Berani bilang 'tidak' pada yang salah<br>
-            🛑 Berani minta maaf kalau salah<br>
-            <em>"Keberanian terbesar adalah jujur pada diri sendiri"</em></p>
-            
-            <div class="emoji" onclick="animateEmoji(event, this)">🌟</div>
-            <p class="step-instruksi">Klik bintang untuk melanjutkan</p>
-            <button class="tombol" onclick="event.stopPropagation(); lanjut(4)">Pasal Terakhir 🌟</button>
+            <p style="font-size:0.9rem">
+                "Jadilah pemberani tapi..."<br>
+                🛑 Kalau hujan deras, lindungi rambut dulu<br>
+                🛑 Berani bilang 'tidak' pada yang salah<br>
+                🛑 Berani minta maaf kalau salah<br>
+                <em>"Keberanian terbesar adalah jujur pada diri sendiri"</em>
+            </p>
+            <div class="emoji" onclick="animateEmoji('🌟')">🌟</div>
+            <button class="tombol" onclick="lanjut(4)">Terakhir 🌈</button>
         </div>
 
-        <!-- Langkah 4 - Kehidupan -->
+        <!-- STEP 4 -->
         <div class="step" id="step4">
             <h3 style="color:#d32f2f">🌍 PASAL 3: HIDUP BAIK</h3>
-            <div style="text-align:left;padding:10px;font-size:0.9em">
+            <div style="text-align:left;padding:10px;font-size:0.9rem">
                 <p>🔹 Sayangi lingkungan: <br>
                 <small>"Tapi sampah cucian boleh ditaruh di kamar ayah"</small></p>
                 
@@ -185,88 +143,62 @@
                 <p>🔹 Hormati semua orang: <br>
                 <small>"Kecuali yang ganggu kamu, ayah yang urus!"</small></p>
             </div>
-            
-            <div class="emoji" onclick="animateEmoji(event, this)">👨👧🌈</div>
-            
-            <div style="border-top:2px dashed #ff6d00;padding:15px">
-                <p style="font-size:0.9em">❤️ Intinya:<br>
-                Ayah ingin kamu tumbuh jadi:<br>
-                <span style="font-size:1.2em">💡 CERDAS • 🤝 BERAKHLAK • 💪 TANGGUH</span></p>
-            </div>
+            <div class="emoji" onclick="animateEmoji('👨👧🌈')">👨👧🌈</div>
         </div>
     </div>
 
     <script>
         let currentStep = 1;
-        const totalSteps = 4;
-
-        function bukaSurat() {
-            document.getElementById('step1').classList.add('active');
-            document.querySelector('.amplop').style.cursor = 'default';
-            document.querySelector('.instruksi').style.display = 'none';
-        }
-
+        
         function lanjut(nomor) {
-            if(nomor > totalSteps) return;
+            // Sembunyikan semua step
+            document.querySelectorAll('.step').forEach(step => {
+                step.style.display = 'none';
+                step.classList.remove('active');
+            });
             
-            const current = document.querySelector('.step.active');
-            const next = document.getElementById('step' + nomor);
+            // Tampilkan step baru dengan animasi
+            const target = document.getElementById('step' + nomor);
+            setTimeout(() => {
+                target.style.display = 'block';
+                setTimeout(() => target.classList.add('active'), 50);
+            }, 300);
             
-            current.classList.add('exit');
-            current.addEventListener('animationend', () => {
-                current.classList.remove('active', 'exit');
-                next.classList.add('active');
-                
-                if(nomor === 4) {
-                    addKonfeti();
-                }
-                
-                currentStep = nomor;
-            }, { once: true });
+            currentStep = nomor;
+            
+            // Efek konfeti di step terakhir
+            if(nomor === 4) {
+                addKonfeti();
+            }
         }
 
-        function animateEmoji(event, element) {
-            event.stopPropagation();
-            
-            // Animasi bounce
-            element.style.animation = 'bounce 0.5s';
-            
-            // Efek konfeti mini
-            const confetti = document.createElement('div');
-            confetti.style.cssText = `
+        function animateEmoji(emoji) {
+            const element = document.createElement('div');
+            element.textContent = emoji;
+            element.style = `
                 position: fixed;
-                left: ${event.clientX}px;
-                top: ${event.clientY}px;
-                font-size: 20px;
-                color: ${['#ff6d00', '#d32f2f', '#00bcd4'][Math.floor(Math.random()*3)]};
-                animation: confetti 1.5s linear;
+                font-size: 2rem;
+                left: ${Math.random()*100}vw;
+                top: ${Math.random()*100}vh;
+                animation: jump 1s ease;
             `;
-            confetti.textContent = '✨';
-            document.body.appendChild(confetti);
-            setTimeout(() => confetti.remove(), 1500);
-            
-            // Reset animasi
-            setTimeout(() => {
-                element.style.animation = '';
-            }, 500);
+            document.body.appendChild(element);
+            setTimeout(() => element.remove(), 1000);
         }
 
         function addKonfeti() {
-            const emojis = ['🎉', '💖', '🌟', '👨👧', '📚', '🌈'];
-            for(let i = 0; i < 50; i++) {
-                const confetti = document.createElement('div');
-                confetti.style.cssText = `
+            const emojis = ['🎉','🌟','📚','👨👧','🌈'];
+            for(let i=0; i<50; i++) {
+                const konfeti = document.createElement('div');
+                konfeti.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+                konfeti.style = `
                     position: fixed;
-                    left: ${Math.random() * 100}vw;
-                    top: ${-Math.random() * 100}vh;
-                    font-size: ${Math.random() * 20 + 10}px;
-                    animation: confetti ${Math.random() * 3 + 2}s linear infinite;
-                    transform: rotate(${Math.random() * 360}deg);
-                    color: hsl(${Math.random() * 360}, 70%, 50%);
+                    font-size: 1.5rem;
+                    left: ${Math.random()*100}vw;
+                    animation: fall ${Math.random()*3+2}s linear infinite;
+                    color: hsl(${Math.random()*360},70%,50%);
                 `;
-                confetti.textContent = emojis[Math.floor(Math.random()*emojis.length)];
-                document.body.appendChild(confetti);
-                setTimeout(() => confetti.remove(), 5000);
+                document.body.appendChild(konfeti);
             }
         }
     </script>
