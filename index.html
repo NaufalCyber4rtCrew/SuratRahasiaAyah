@@ -1,222 +1,66 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <title>Surat Interaktif Ayah 👨👧</title>
-    <style>
-        /* ===== GLOBAL STYLES ===== */
-        body {
-            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
-            font-family: 'Comic Sans MS', cursive;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-            position: relative;
-            overflow-x: hidden;
-        }
-
-        /* ===== AMPLOP UTAMA ===== */
-        .amplop {
-            max-width: 600px;
-            margin: 50px auto;
-            background: #fff9f2;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            padding: 40px;
-            position: relative;
-            cursor: pointer;
-            transition: all 0.3s;
-            border: 3px dashed #ff6d00;
-        }
-
-        .amplop:before {
-            content: '✉️';
-            position: absolute;
-            top: -30px;
-            right: -30px;
-            font-size: 60px;
-            filter: drop-shadow(0 5px 5px rgba(0,0,0,0.2));
-            animation: pulse 2s infinite;
-        }
-
-        /* ===== TIPOGRAFI ===== */
-        .judul {
-            color: #d32f2f;
-            text-shadow: 2px 2px 0px white;
-            margin: 0 0 20px 0;
-            font-size: 2.5em;
-            transform: rotate(-2deg);
-        }
-
-        .instruksi {
-            color: #666;
-            margin: 20px 0;
-            font-style: italic;
-            animation: blink 1.5s infinite;
-        }
-
-        /* ===== ANIMASI ===== */
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        @keyframes blink {
-            50% { opacity: 0.5; }
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            25% { transform: translateY(-20px) rotate(5deg); }
-            50% { transform: translateY(0) rotate(0deg); }
-            75% { transform: translateY(-10px) rotate(-5deg); }
-        }
-
-        /* ===== STEP/CONTENT ===== */
-        .step {
-            display: none;
-            animation: slideIn 0.8s ease-out;
-        }
-
-        @keyframes slideIn {
-            from { transform: translateY(50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        /* ===== TOMBOL ===== */
-        .tombol {
-            background: #ff6d00;
-            color: white;
-            padding: 15px 40px;
-            border: none;
-            border-radius: 30px;
-            font-size: 1.2em;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin: 15px;
-            box-shadow: 0 5px 15px rgba(255,109,0,0.3);
-        }
-
-        .tombol:hover {
-            transform: scale(1.1) rotate(2deg);
-            background: #ff9100;
-        }
-
-        /* ===== DEKORASI ===== */
-        .emoji-dekorasi {
-            position: fixed;
-            font-size: 40px;
-            opacity: 0.2;
-            z-index: -1;
-            animation: float 6s infinite linear;
-        }
-    </style>
+    <!-- ... (bagian head sama) ... -->
 </head>
 <body>
-    <!-- Emoji latar belakang -->
-    <div class="emoji-dekorasi" style="left:10%;top:20%">👨👧</div>
-    <div class="emoji-dekorasi" style="left:80%;top:70%">💖</div>
-    <div class="emoji-dekorasi" style="left:30%;top:80%">🎀</div>
-
-    <!-- Amplop utama -->
+    <!-- ... (dekorasi dan amplop sama) ... -->
+    
     <div class="amplop" onclick="bukaSurat()">
-        <h1 class="judul">📜 SURAT RAHASIA AYAH 📜</h1>
-        <p class="instruksi">Klik amplop untuk membuka!</p>
+        <h1 class="judul">📜 SURAT NASEHAT AYAH 📜</h1>
+        <p class="instruksi">Klik amplop untuk kebijakan ayah!</p>
         
         <!-- Langkah 1 -->
         <div class="step" id="step1">
-            <p style="font-size:1.2em">📅 Tanggal: <em>32 Februari 2024</em></p>
+            <p style="font-size:1.2em">📅 Tertanggal: <em>Selamanya</em></p>
             <div style="font-size:40px;margin:20px">👇</div>
-            <button class="tombol" onclick="lanjut(2)">Buka Pesan Rahasia</button>
+            <button class="tombol" onclick="lanjut(2)">Baca Kebijakan Baru</button>
         </div>
 
-        <!-- Langkah 2 -->
+        <!-- Langkah 2 - Pendidikan -->
         <div class="step" id="step2">
-            <h3>🚨 PASAL 1: LARANGAN UTAMA</h3>
-            <p>Dilarang tumbuh dewasa sebelum:<br>
-            ✅ Ayah punya cadangan uang jajan 1M<br>
-            ✅ Ayah siap jadi kakek<br>
-            ✅ Kamu bisa bikin kopi untuk Ayah</p>
-            <button class="tombol" onclick="lanjut(3)">Lanjut Baca 📖</button>
+            <h3>🎓 PASAL 1: BELAJAR SERU</h3>
+            <p>"Rajin-rajin belajar nak, tapi..."<br>
+            ✅ Kalau ngantuk boleh tidur<br>
+            ✅ Nilai B boleh asal usaha maksimal<br>
+            ✅ Yang penting paham, bukan hafal<br>
+            <small>(Tapi matematika jangan dikurangi ayah!)</small></p>
+            <button class="tombol" onclick="lanjut(3)">Pasal Berikutnya 📘</button>
         </div>
 
-        <!-- Langkah 3 -->
+        <!-- Langkah 3 - Karakter -->
         <div class="step" id="step3">
-            <h3>💡 NASEHAT PENTING</h3>
-            <p>Jika ada yang mengganggumu:<br>
-            <span style="font-size:40px">🏃♀️ → 📱 → 🔧</span><br>
-            Lari → Telpon Ayah → Bawa kunci inggris!</p>
-            <button class="tombol" onclick="lanjut(4)">Pesan Terakhir 🏁</button>
+            <h3>💪 PASAL 2: TANGGUNG JAWAB</h3>
+            <p>"Jadilah pemberani tapi..."<br>
+            🛑 Kalau hujan deras, lindungi rambut dulu<br>
+            🛑 Berani bilang 'tidak' pada yang salah<br>
+            🛑 Berani minta maaf kalau salah<br>
+            <em>"Keberanian terbesar adalah jujur pada diri sendiri"</em></p>
+            <button class="tombol" onclick="lanjut(4)">Pasal Terakhir 🌟</button>
         </div>
 
-        <!-- Langkah 4 -->
+        <!-- Langkah 4 - Kehidupan -->
         <div class="step" id="step4">
-            <h3 style="color:#d32f2f">💌 Isi Hati Ayah</h3>
-            <p style="font-size:1.2em">Sebenarnya semua larangan itu bohong...<br>
-            <span style="font-size:60px">😉</span><br>
-            Yang benar adalah:<br>
-            ❤️ Kamu akan selalu jadi bayi Ayah<br>
-            🛡️ Ayah akan selalu melindungimu<br>
-            🎁 Ayah sayang kamu lebih dari apapun!</p>
-            <div style="font-size:80px;margin:20px">👨👧🎉</div>
+            <h3 style="color:#d32f2f">🌍 PASAL 3: HIDUP BAIK</h3>
+            <div style="text-align:left;padding:20px">
+                <p>🔹 Sayangi lingkungan: <br>
+                <small>"Tapi sampah cucian boleh ditaruh di kamar ayah"</small></p>
+                
+                <p>🔹 Jaga kesehatan: <br>
+                <small>"Kalau begadang wajib minum susu + foto bukti"</small></p>
+                
+                <p>🔹 Hormati semua orang: <br>
+                <small>"Kecuali yang ganggu kamu, ayah yang urus!"</small></p>
+            </div>
+            <div style="border-top:2px dashed #ff6d00;padding:20px">
+                <p>❤️ Intinya:<br>
+                Ayah ingin kamu tumbuh jadi:<br>
+                <span style="font-size:1.3em">💡 CERDAS • 🤝 BERAKHLAK • 💪 TANGGUH</span></p>
+                <div style="font-size:60px">👨👧🌈</div>
+            </div>
         </div>
     </div>
 
-    <script>
-        let currentStep = 0;
-
-        function bukaSurat() {
-            document.querySelector('.amplop').style.cursor = 'default';
-            document.querySelector('.instruksi').style.display = 'none';
-            lanjut(1);
-            new Audio('https://www.soundjay.com/communication/sounds/envelope-open-1.mp3').play();
-        }
-
-        function lanjut(nextStep) {
-            if(currentStep > 0) {
-                document.getElementById(`step${currentStep}`).style.animation = 
-                    'fadeOut 0.5s forwards';
-                setTimeout(() => {
-                    document.getElementById(`step${currentStep}`).style.display = 'none';
-                }, 500);
-            }
-
-            if(nextStep <= 4) {
-                currentStep = nextStep;
-                const step = document.getElementById(`step${currentStep}`);
-                step.style.display = 'block';
-                step.style.animation = 'slideIn 0.8s forwards';
-                
-                if(currentStep === 4) {
-                    efekKonfeti();
-                }
-            }
-        }
-
-        function efekKonfeti() {
-            const emojis = ['🎉', '💖', '👨👧', '🎁'];
-            for(let i = 0; i < 50; i++) {
-                const confetti = document.createElement('div');
-                confetti.style.cssText = `
-                    position: fixed;
-                    left: ${Math.random() * 100}%;
-                    top: -30px;
-                    font-size: 25px;
-                    opacity: 0.7;
-                    animation: fall ${Math.random() * 3 + 2}s linear;
-                    z-index: -1;
-                `;
-                confetti.innerHTML = emojis[Math.floor(Math.random()*emojis.length)];
-                document.body.appendChild(confetti);
-                setTimeout(() => confetti.remove(), 5000);
-            }
-        }
-
-        // Blokir klik kanan
-        document.addEventListener('contextmenu', function(e) {
-            e.preventDefault();
-            alert('❌ Dilarang klik kanan! Ini surat rahasia!');
-        });
-    </script>
+    <!-- ... (script sama) ... -->
 </body>
 </html>
