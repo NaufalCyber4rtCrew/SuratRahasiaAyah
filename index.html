@@ -51,7 +51,7 @@
 
         .emoji {
             font-size: 60px;
-            cursor: help;
+            cursor: pointer;
             transition: transform 0.3s ease;
             display: inline-block;
         }
@@ -121,19 +121,19 @@
         <p class="instruksi">Klik amplop untuk membuka kebijakan ayah</p>
         
         <!-- Langkah 1 -->
-        <div class="step active" id="step1" onclick="lanjut(2)">
+        <div class="step active" id="step1">
             <p style="font-size:1.2em">📅 Tertanggal: <em>Selamanya</em></p>
             
             <div class="emoji-container">
-                <div class="emoji" onclick="animateEmoji(this)">👇</div>
-                <span class="tooltip">Klik emoji ini untuk melihat pesan rahasia!</span>
+                <div class="emoji" onclick="animateEmoji(event, this)">👇</div>
+                <span class="tooltip">Klik untuk membuka surat rahasia!</span>
             </div>
             
             <p class="highlight">Klik di sini untuk mulai membaca</p>
         </div>
 
         <!-- Langkah 2 - Pendidikan -->
-        <div class="step" id="step2" onclick="lanjut(3)">
+        <div class="step" id="step2">
             <h3>🎓 PASAL 1: BELAJAR SERU</h3>
             <p>"Rajin-rajin belajar nak, tapi..."<br>
             ✅ Kalau ngantuk boleh tidur<br>
@@ -142,13 +142,15 @@
             <small>(Tapi matematika jangan dikurangi ayah!)</small></p>
             
             <div class="emoji-container">
-                <div class="emoji" onclick="animateEmoji(this)">📘</div>
-                <span class="tooltip">Buku ini menyimpan kebijaksanaan terpendam!</span>
+                <div class="emoji" onclick="animateEmoji(event, this)">📘</div>
+                <span class="tooltip">Buku ajaib dengan pesan tersembunyi!</span>
             </div>
+            
+            <button class="tombol" onclick="lanjut(3)">Pasal Berikutnya 📘</button>
         </div>
 
         <!-- Langkah 3 - Karakter -->
-        <div class="step" id="step3" onclick="lanjut(4)">
+        <div class="step" id="step3">
             <h3>💪 PASAL 2: TANGGUNG JAWAB</h3>
             <p>"Jadilah pemberani tapi..."<br>
             🛑 Kalau hujan deras, lindungi rambut dulu<br>
@@ -157,9 +159,11 @@
             <em>"Keberanian terbesar adalah jujur pada diri sendiri"</em></p>
             
             <div class="emoji-container">
-                <div class="emoji" onclick="animateEmoji(this)">🌟</div>
-                <span class="tooltip">Bintang ini akan membimbingmu!</span>
+                <div class="emoji" onclick="animateEmoji(event, this)">🌟</div>
+                <span class="tooltip">Bintang keberuntungan milikmu!</span>
             </div>
+            
+            <button class="tombol" onclick="lanjut(4)">Pasal Terakhir 🌟</button>
         </div>
 
         <!-- Langkah 4 - Kehidupan -->
@@ -177,8 +181,8 @@
             </div>
             
             <div class="emoji-container">
-                <div class="emoji" onclick="animateEmoji(this)">👨👧🌈</div>
-                <span class="tooltip">Keluarga selalu mendukungmu!</span>
+                <div class="emoji" onclick="animateEmoji(event, this)">👨👧🌈</div>
+                <span class="tooltip">Pelangi keluarga bahagia!</span>
             </div>
             
             <div style="border-top:2px dashed #ff6d00;padding:20px">
@@ -203,14 +207,14 @@
             next.classList.add('active');
         }
 
-        function animateEmoji(element) {
+        function animateEmoji(event, element) {
+            event.stopPropagation(); // Hentikan klik agar tidak pindah step
             element.style.animation = 'bounce 0.5s';
+            
+            // Reset animasi setelah selesai
             setTimeout(() => {
                 element.style.animation = '';
             }, 500);
-            
-            // Hentikan propagasi klik agar tidak pindah step
-            event.stopPropagation();
         }
     </script>
 </body>
