@@ -1,42 +1,126 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <!-- ... (bagian head sama) ... -->
+    <meta charset="UTF-8">
+    <title>Surat Nasehat Ayah</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f9ff;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .amplop {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            width: 90%;
+            max-width: 500px;
+            padding: 30px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .step {
+            display: none;
+            padding: 20px;
+            border-radius: 10px;
+            background: #fff5e6;
+            margin: 15px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .step.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .amplop:hover {
+            transform: scale(1.02);
+        }
+
+        .judul {
+            color: #d32f2f;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .instruksi {
+            text-align: center;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        .tombol {
+            background: #ff6d00;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 20px auto;
+        }
+
+        .tombol:hover {
+            background: #e65c00;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .emoji {
+            font-size: 60px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .highlight {
+            color: #d32f2f;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-    <!-- ... (dekorasi dan amplop sama) ... -->
-    
     <div class="amplop" onclick="bukaSurat()">
         <h1 class="judul">📜 SURAT NASEHAT AYAH 📜</h1>
-        <p class="instruksi">Klik amplop untuk kebijakan ayah!</p>
+        <p class="instruksi">Klik amplop untuk membuka kebijakan ayah</p>
         
         <!-- Langkah 1 -->
-        <div class="step" id="step1">
+        <div class="step active" id="step1" onclick="lanjut(2)">
             <p style="font-size:1.2em">📅 Tertanggal: <em>Selamanya</em></p>
-            <div style="font-size:40px;margin:20px">👇</div>
-            <button class="tombol" onclick="lanjut(2)">Baca Kebijakan Baru</button>
+            <div class="emoji">👇</div>
+            <p class="highlight">Klik di sini untuk mulai membaca</p>
         </div>
 
         <!-- Langkah 2 - Pendidikan -->
-        <div class="step" id="step2">
+        <div class="step" id="step2" onclick="lanjut(3)">
             <h3>🎓 PASAL 1: BELAJAR SERU</h3>
             <p>"Rajin-rajin belajar nak, tapi..."<br>
             ✅ Kalau ngantuk boleh tidur<br>
             ✅ Nilai B boleh asal usaha maksimal<br>
             ✅ Yang penting paham, bukan hafal<br>
             <small>(Tapi matematika jangan dikurangi ayah!)</small></p>
-            <button class="tombol" onclick="lanjut(3)">Pasal Berikutnya 📘</button>
+            <div class="emoji">📘</div>
         </div>
 
         <!-- Langkah 3 - Karakter -->
-        <div class="step" id="step3">
+        <div class="step" id="step3" onclick="lanjut(4)">
             <h3>💪 PASAL 2: TANGGUNG JAWAB</h3>
             <p>"Jadilah pemberani tapi..."<br>
             🛑 Kalau hujan deras, lindungi rambut dulu<br>
             🛑 Berani bilang 'tidak' pada yang salah<br>
             🛑 Berani minta maaf kalau salah<br>
             <em>"Keberanian terbesar adalah jujur pada diri sendiri"</em></p>
-            <button class="tombol" onclick="lanjut(4)">Pasal Terakhir 🌟</button>
+            <div class="emoji">🌟</div>
         </div>
 
         <!-- Langkah 4 - Kehidupan -->
@@ -56,11 +140,24 @@
                 <p>❤️ Intinya:<br>
                 Ayah ingin kamu tumbuh jadi:<br>
                 <span style="font-size:1.3em">💡 CERDAS • 🤝 BERAKHLAK • 💪 TANGGUH</span></p>
-                <div style="font-size:60px">👨👧🌈</div>
+                <div class="emoji">👨👧🌈</div>
             </div>
         </div>
     </div>
 
-    <!-- ... (script sama) ... -->
+    <script>
+        function bukaSurat() {
+            document.getElementById('step1').classList.add('active');
+        }
+
+        function lanjut(nomor) {
+            const current = document.querySelector('.step.active');
+            const next = document.getElementById('step' + nomor);
+            
+            current.classList.remove('active');
+            void current.offsetWidth; // Trigger reflow untuk animasi
+            next.classList.add('active');
+        }
+    </script>
 </body>
 </html>
