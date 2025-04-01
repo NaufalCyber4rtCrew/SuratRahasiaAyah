@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Surat Interaktif Ayah 👨👧</title>
     <style>
+        /* ===== GLOBAL STYLES ===== */
         body {
             background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
             font-family: 'Comic Sans MS', cursive;
@@ -11,18 +12,20 @@
             margin: 0;
             padding: 20px;
             position: relative;
+            overflow-x: hidden;
         }
 
+        /* ===== AMPLOP UTAMA ===== */
         .amplop {
             max-width: 600px;
             margin: 50px auto;
-            background: white;
+            background: #fff9f2;
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             padding: 40px;
             position: relative;
             cursor: pointer;
-            transition: transform 0.3s;
+            transition: all 0.3s;
             border: 3px dashed #ff6d00;
         }
 
@@ -36,45 +39,30 @@
             animation: pulse 2s infinite;
         }
 
-        .amplop:hover {
-            transform: rotate(-2deg) scale(1.02);
-        }
-
+        /* ===== TIPOGRAFI ===== */
         .judul {
             color: #d32f2f;
             text-shadow: 2px 2px 0px white;
-            margin: 0;
+            margin: 0 0 20px 0;
             font-size: 2.5em;
+            transform: rotate(-2deg);
         }
 
         .instruksi {
             color: #666;
-            margin-top: 20px;
+            margin: 20px 0;
             font-style: italic;
             animation: blink 1.5s infinite;
         }
 
-        .step {
-            display: none;
-            animation: slideIn 0.8s ease-out;
-        }
-
-        .emoji-dekorasi {
-            position: fixed;
-            font-size: 40px;
-            opacity: 0.3;
-            z-index: -1;
-            animation: float 6s infinite linear;
-        }
-
+        /* ===== ANIMASI ===== */
         @keyframes pulse {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.1); }
         }
 
-        @keyframes slideIn {
-            from { transform: translateY(50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        @keyframes blink {
+            50% { opacity: 0.5; }
         }
 
         @keyframes float {
@@ -84,45 +72,151 @@
             75% { transform: translateY(-10px) rotate(-5deg); }
         }
 
-        @keyframes blink {
-            50% { opacity: 0.5; }
+        /* ===== STEP/CONTENT ===== */
+        .step {
+            display: none;
+            animation: slideIn 0.8s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* ===== TOMBOL ===== */
+        .tombol {
+            background: #ff6d00;
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 15px;
+            box-shadow: 0 5px 15px rgba(255,109,0,0.3);
+        }
+
+        .tombol:hover {
+            transform: scale(1.1) rotate(2deg);
+            background: #ff9100;
+        }
+
+        /* ===== DEKORASI ===== */
+        .emoji-dekorasi {
+            position: fixed;
+            font-size: 40px;
+            opacity: 0.2;
+            z-index: -1;
+            animation: float 6s infinite linear;
         }
     </style>
 </head>
 <body>
-    <!-- Emoji dekorasi -->
+    <!-- Emoji latar belakang -->
     <div class="emoji-dekorasi" style="left:10%;top:20%">👨👧</div>
     <div class="emoji-dekorasi" style="left:80%;top:70%">💖</div>
     <div class="emoji-dekorasi" style="left:30%;top:80%">🎀</div>
 
+    <!-- Amplop utama -->
     <div class="amplop" onclick="bukaSurat()">
-        <h1 class="judul">SURAT RAHASIA AYAH</h1>
+        <h1 class="judul">📜 SURAT RAHASIA AYAH 📜</h1>
         <p class="instruksi">Klik amplop untuk membuka!</p>
         
-        <!-- Step 1 - Pembuka -->
+        <!-- Langkah 1 -->
         <div class="step" id="step1">
-            <p>📅 Tanggal: <em>32 Februari 2024</em></p>
-            <p>Untuk Putri Tersayangku,</p>
-            <div style="font-size:40px">👇</div>
-            <button class="tombol" onclick="lanjut(2)">Baca Pesan</button>
+            <p style="font-size:1.2em">📅 Tanggal: <em>32 Februari 2024</em></p>
+            <div style="font-size:40px;margin:20px">👇</div>
+            <button class="tombol" onclick="lanjut(2)">Buka Pesan Rahasia</button>
         </div>
 
-        <!-- Step 2-4 sama seperti sebelumnya -->
+        <!-- Langkah 2 -->
+        <div class="step" id="step2">
+            <h3>🚨 PASAL 1: LARANGAN UTAMA</h3>
+            <p>Dilarang tumbuh dewasa sebelum:<br>
+            ✅ Ayah punya cadangan uang jajan 1M<br>
+            ✅ Ayah siap jadi kakek<br>
+            ✅ Kamu bisa bikin kopi untuk Ayah</p>
+            <button class="tombol" onclick="lanjut(3)">Lanjut Baca 📖</button>
+        </div>
+
+        <!-- Langkah 3 -->
+        <div class="step" id="step3">
+            <h3>💡 NASEHAT PENTING</h3>
+            <p>Jika ada yang mengganggumu:<br>
+            <span style="font-size:40px">🏃♀️ → 📱 → 🔧</span><br>
+            Lari → Telpon Ayah → Bawa kunci inggris!</p>
+            <button class="tombol" onclick="lanjut(4)">Pesan Terakhir 🏁</button>
+        </div>
+
+        <!-- Langkah 4 -->
+        <div class="step" id="step4">
+            <h3 style="color:#d32f2f">💌 Isi Hati Ayah</h3>
+            <p style="font-size:1.2em">Sebenarnya semua larangan itu bohong...<br>
+            <span style="font-size:60px">😉</span><br>
+            Yang benar adalah:<br>
+            ❤️ Kamu akan selalu jadi bayi Ayah<br>
+            🛡️ Ayah akan selalu melindungimu<br>
+            🎁 Ayah sayang kamu lebih dari apapun!</p>
+            <div style="font-size:80px;margin:20px">👨👧🎉</div>
+        </div>
     </div>
 
     <script>
-        // Script tetap sama dengan tambahan:
+        let currentStep = 0;
+
         function bukaSurat() {
             document.querySelector('.amplop').style.cursor = 'default';
             document.querySelector('.instruksi').style.display = 'none';
             lanjut(1);
+            new Audio('https://www.soundjay.com/communication/sounds/envelope-open-1.mp3').play();
         }
 
-        // Tambahan efek suara saat klik
-        function playSound() {
-            const audio = new Audio('https://www.soundjay.com/communication/sounds/envelope-open-1.mp3');
-            audio.play();
+        function lanjut(nextStep) {
+            if(currentStep > 0) {
+                document.getElementById(`step${currentStep}`).style.animation = 
+                    'fadeOut 0.5s forwards';
+                setTimeout(() => {
+                    document.getElementById(`step${currentStep}`).style.display = 'none';
+                }, 500);
+            }
+
+            if(nextStep <= 4) {
+                currentStep = nextStep;
+                const step = document.getElementById(`step${currentStep}`);
+                step.style.display = 'block';
+                step.style.animation = 'slideIn 0.8s forwards';
+                
+                if(currentStep === 4) {
+                    efekKonfeti();
+                }
+            }
         }
+
+        function efekKonfeti() {
+            const emojis = ['🎉', '💖', '👨👧', '🎁'];
+            for(let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.cssText = `
+                    position: fixed;
+                    left: ${Math.random() * 100}%;
+                    top: -30px;
+                    font-size: 25px;
+                    opacity: 0.7;
+                    animation: fall ${Math.random() * 3 + 2}s linear;
+                    z-index: -1;
+                `;
+                confetti.innerHTML = emojis[Math.floor(Math.random()*emojis.length)];
+                document.body.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 5000);
+            }
+        }
+
+        // Blokir klik kanan
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            alert('❌ Dilarang klik kanan! Ini surat rahasia!');
+        });
     </script>
 </body>
 </html>
